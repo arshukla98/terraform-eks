@@ -36,7 +36,7 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     ami_type               = "AL2_x86_64"
-    instance_types         = ["t3.micro"]
+    instance_types         = ["t3.medium"]  # Increased from t3.micro to support EBS CSI driver controller
     disk_size              = 30
     vpc_security_group_ids = [aws_security_group.all_worker_mgmt.id]
   }
@@ -48,6 +48,23 @@ module "eks" {
       min_size     = 2
       max_size     = 3
       desired_size = 2
+    }
+  }
+
+  # EKS Cluster Addons
+  cluster_addons = {
+    aws-ebs-csi-driver = {
+      most_recent              = true
+      service_account_role_arn = aws_iam_role.ebs_csi_driver.arn
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
+    }
+    coredns = {
+      most_recent = true
     }
   }
 }

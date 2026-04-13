@@ -8,7 +8,8 @@ data "aws_availability_zones" "available" {}
 data "aws_caller_identity" "current" {}
 
 locals {
-  cluster_name = "aziron-eks-${random_string.suffix.result}"
+  # cluster_name = "aziron-eks-${random_string.suffix.result}"
+  cluster_name = "aziron-eks-cluster"
 }
 
 resource "random_string" "suffix" {

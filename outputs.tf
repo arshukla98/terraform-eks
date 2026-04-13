@@ -22,6 +22,11 @@ output "oidc_provider_arn" {
   value = module.eks.oidc_provider_arn
 }
 
+output "ebs_csi_driver_role_arn" {
+  description = "IAM role ARN for EBS CSI driver"
+  value       = aws_iam_role.ebs_csi_driver.arn
+}
+
 #output "zz_update_kubeconfig_command" {
   # value = "aws eks update-kubeconfig --name " + module.eks.cluster_id
 #  value = format("%s %s %s %s", "aws eks update-kubeconfig --name", module.eks.cluster_id, "--region", var.aws_region)
