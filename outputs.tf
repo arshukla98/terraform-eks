@@ -32,3 +32,7 @@ output "ebs_csi_driver_role_arn" {
 #  value = format("%s %s %s %s", "aws eks update-kubeconfig --name", module.eks.cluster_id, "--region", var.aws_region)
 #}
 
+output "cluster_name" { 
+  description = "EKS cluster name." 
+  value       = module.eks.cluster_name 
+} 
